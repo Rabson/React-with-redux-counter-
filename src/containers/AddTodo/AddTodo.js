@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../../hoc/Aux';
+import Aux from '../../hoc/ux';
 import { connect } from 'react-redux';
 
 import { increment, decrement, addFive } from '../../store/actions/counter';
