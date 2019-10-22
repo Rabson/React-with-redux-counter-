@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import { Route, Switch } from 'react-router-dom'
@@ -12,22 +12,48 @@ import Siginup from './components/Signup/Siginup';
 import Login from './components/Login/Login';
 // import AuthenticatedRoute from "./hoc/AuthenticatedRoute";
 // import UnauthenticatedRoute from "./hoc/UnauthenticatedRoute";
+
+
+import Aux from './hoc/ux';
 function App() {
 
   // const [isAuthenticated, userHasAuthenticated] = useState(false);
 
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  async function onLoad() {
+    try {
+      // await Auth.currentSession();
+      // userHasAuthenticated(true);
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  let auth = sessionStorage.getItem("auth") ? true : false;
   return (
     <div className="App">
-      <Header />
-      <Layout>
-        <Switch>
-          <Route path="/showtodo" component={ShowTodo} />
-          <Route path="/addtodo" component={AddTodo} />
-          <Route path="/signup" component={Siginup} />
-          <Route path="/login" component={Login} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </Layout>
+      {auth ? (
+        <Aux>
+          <Header />
+          <Layout>
+            <Switch>
+              <Route path="/addtodo" component={AddTodo} />
+              <Route path="/signup" component={Siginup} />
+              <Route path="/showtodo" component={ShowTodo} />
+              <Route path="/Home" component={Home} />
+            </Switch>
+          </Layout>
+        </Aux>
+      ) :
+        (<Layout>
+            <Switch>
+              <Route path="/" component={Login} />
+            </Switch>
+          </Layout>)
+      }
     </div>
   );
 }

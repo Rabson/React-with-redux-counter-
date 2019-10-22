@@ -14,9 +14,9 @@ class SignUp extends Component {
     render() {
         return (<Aux>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 offset-md-3">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-6 offset-md-3">
                         <Formik
                             initialValues={{
                                 firstName: '',

@@ -15,16 +15,19 @@ class Login extends Component {
     render() {
         return (<Aux>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 offset-md-3">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-6 offset-md-3">
                         {/* <button onClick={() => this.props.history.push('/showtodo')} >
                 login        </button>        */}
                         <Formik
                             initialValues={{ email: '', password: '' }}
                             onSubmit={(values, { setSubmitting }) => {
                                 setSubmitting(false);
+                                sessionStorage.setItem('auth',true)
                                 this.props.history.push('/showtodo')
+
+
                                 // setTimeout(() => {
                                 //     alert(JSON.stringify(values, null, 2));
                                 // }, 500);

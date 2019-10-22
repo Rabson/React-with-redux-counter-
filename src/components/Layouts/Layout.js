@@ -5,7 +5,7 @@ import './Layout.css'
 
 const layout = (props) => (
     <Aux>
-        <div class="jumbotron">
+        <div className="jumbotron">
             {props.children}
         </div>
     </Aux>
