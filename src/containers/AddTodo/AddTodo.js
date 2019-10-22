@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 
 import { increment, decrement, addFive } from '../../store/actions/counter';
 
+// form
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
 class AddTodo extends Component {
 
     constructor(props) {
@@ -22,14 +26,51 @@ class AddTodo extends Component {
     }
     render() {
         return (<Aux>
-        
-            <form onSubmit={this.handleSubmit}>
-                Todo:<br />
-                <input type="text" ref={(input) => this.state.todo} onChange={(e)=> this.setState({ todo: e.target.value })} />
-                <br />
-                <input type="submit" value="Submit" />
-            </form>
-
+            <div class="container">
+                <Formik
+                    initialValues={{ todo: ''}}
+                    onSubmit={(values, { setSubmitting }) => {
+                        setSubmitting(false);
+                        this.props.history.push('/showtodo')
+                        // setTimeout(() => {
+                        //     alert(JSON.stringify(values, null, 2));
+                        // }, 500);
+                    }}
+                    validationSchema={Yup.object().shape({
+                        todo: Yup.string()
+                            .email()
+                            .required('Required'),
+    
+                    })}
+                >
+                    {props => {
+                        const {
+                            values,
+                            touched,
+                            errors,
+                            dirty,
+                            isSubmitting,
+                            handleChange,
+                            handleBlur,
+                            handleSubmit,
+                            handleReset,
+                        } = props;
+                        return (
+                            <Form onSubmit={handleSubmit}>
+                                <div className="form-group">
+                                    <label htmlFor="firstName">Todo</label>
+                                    <Field name="todo" type="text" className={'form-control' + (errors.todo && touched.todo ? ' is-invalid' : '')} />
+                                    <ErrorMessage name="todo" component="div" className="invalid-feedback" />
+                                </div>
+                          
+                                <div className="form-group">
+                                    <button type="submit" className="btn btn-primary mr-2" disabled={isSubmitting} >Add todo</button>
+                                </div>
+                            </Form>
+                        );
+                    }}
+                </Formik>
+            </div>
         </Aux>)
     }
 }

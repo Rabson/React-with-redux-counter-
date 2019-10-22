@@ -7,7 +7,7 @@ import TodosReducer from './reducers/todo';
 import thunk from 'redux-thunk';
 
 import createSagaMidleware from 'redux-saga';
-import watchIncByUSer from './sagas/index'
+// import watchIncByUSer from './sagas/index'
 const rootReducers = combineReducers({
     counter: CounterReducer,
     todo: TodosReducer

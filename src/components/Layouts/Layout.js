@@ -3,11 +3,11 @@ import React from "react"
 import Aux from '../../hoc/ux'
 import './Layout.css'
 
-const layout = (props)=> (
+const layout = (props) => (
     <Aux>
-       < main className="Content" >
-           {props.children}
-       </main>
+        <div class="jumbotron">
+            {props.children}
+        </div>
     </Aux>
 )
 
